@@ -121,6 +121,36 @@ int main() {
     // =================================================================
 
     cout << "=== Q1 ===\n";
+    double Total=0 ;
+    int valid=0;
+    double maximum=morningWeights[0];
+    int position=0;
+    int longestrun=0;
+    int currentrun=0;
+
+    for (int i=0; i<=morningWeights.size()-1; i++){
+        Total+=morningWeights[i];
+
+        if (morningWeights[i] > 0 && morningWeights[i] < 80){
+            valid+=1;
+            currentrun+=1;
+            
+            if (currentrun>longestrun){
+                longestrun=currentrun;
+            } 
+        } else {
+                currentrun=0;
+            }
+
+        if (morningWeights[i]>maximum){
+            maximum=morningWeights[i];
+            position=i;
+        }
+
+    }
+    cout<<"Total:" << Total<< endl<<"Valid:"<< valid << endl<< "Heaviest:" << maximum<< "kg at position "<< position<< endl<<"Longest valid run: " << longestrun<<endl;
+
+
 
 
 
