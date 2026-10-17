@@ -421,6 +421,36 @@ cout << accepted << " accepted, "
 
 
 
+int current = 6;
+int seeds = board[current];
+int laps = 0;
+
+board[current] = 0;
+
+while (true) {
+    laps++;
+
+    for (int i = 0; i < seeds; i++) {
+        current = (current % 16) + 1;
+        board[current]++;
+    }
+
+    if (board[current] == 1) {
+        break;
+    } else {
+        seeds = board[current];
+        board[current] = 0;
+    }
+}
+
+cout << "Final board: ";
+printBoard(board);
+
+cout << "Landed in pit " << current
+     << " after " << laps << " laps" << endl;
+
+
+
     
     // =================================================================
     //  STRETCH  ·  optional
