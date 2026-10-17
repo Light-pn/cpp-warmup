@@ -85,6 +85,24 @@ void printBoard(const vector<int> &b) {
     cout << "\n";
 }
 
+
+bool byWeight(const Delivery &a, const Delivery &b) {
+    return a.kg > b.kg;
+}
+
+bool byFarmer(const Delivery &a, const Delivery &b) {
+    return a.farmer < b.farmer;
+}
+
+bool byGradeWeight(const Delivery &a, const Delivery &b) {
+    if (a.grade != b.grade) {
+        return a.grade < b.grade;
+    } else {
+        return a.kg > b.kg;
+    }
+}
+
+
 int findFarmer(const vector<Delivery> &log, string name);
 double payment(double kg, char grade);
 
@@ -461,7 +479,36 @@ cout << "Landed in pit " << current
     //  Uses: logbook
     // =================================================================
 
-    // cout << "=== Q7 ===\n";
+    cout << "=== Q7 ===\n";
+
+
+vector<Delivery> sorted = logbook;
+
+sort(sorted.begin(), sorted.end(), byWeight);
+
+cout << "Heaviest first: ";
+for (int i = 0; i < sorted.size(); i++) {
+    cout << sorted[i].farmer << "(" << sorted[i].kg << ") ";
+}
+cout << endl;
+
+sort(sorted.begin(), sorted.end(), byFarmer);
+
+cout << "Alphabetical: ";
+for (int i = 0; i < sorted.size(); i++) {
+    cout << sorted[i].farmer << " ";
+}
+cout << endl;
+
+sort(sorted.begin(), sorted.end(), byGradeWeight);
+
+cout << "Grade then weight: ";
+for (int i = 0; i < sorted.size(); i++) {
+    cout << sorted[i].grade << sorted[i].farmer
+         << "(" << sorted[i].kg << ") ";
+}
+cout << endl;
+
 
 
 
@@ -480,7 +527,6 @@ cout << "Landed in pit " << current
 
     return 0;
 }
-
 
 int findFarmer(const vector<Delivery> &log, string name) 
     {
