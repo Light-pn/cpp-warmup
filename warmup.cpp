@@ -521,6 +521,38 @@ cout << endl;
 
     // cout << "=== Q8 ===\n";
 
+cout << "=== Q8 ===" << endl;
+
+cout << "Adjacent: ";
+
+for (int i = 1; i < logbook.size(); i++) {
+    if (logbook[i].farmer == logbook[i-1].farmer &&
+        logbook[i].kg == logbook[i-1].kg) {
+
+        cout << logbook[i].farmer << "("
+             << logbook[i].kg << ") ";
+    }
+}
+
+cout << endl;
+
+cout << "Anywhere: ";
+
+for (int i = 0; i < logbook.size(); i++) {
+    for (int j = i+1; j < logbook.size(); j++) {
+
+        if (logbook[i].farmer == logbook[j].farmer &&
+            logbook[i].kg == logbook[j].kg) {
+
+            cout << logbook[i].farmer << "("
+                 << logbook[i].kg << ") at "
+                 << i << " and " << j << "  ";
+        }
+    }
+}
+
+cout << endl;
+
 
 
 
