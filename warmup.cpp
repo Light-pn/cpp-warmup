@@ -84,6 +84,8 @@ void printBoard(const vector<int> &b) {
     cout << "\n";
 }
 
+int findFarmer(const vector<Delivery> &log, string name);
+
 
 int main() {
 
@@ -170,47 +172,47 @@ int main() {
 //weight, and their average weight. Then say which grade had the best **average**.
 
 
-    int counta=0;
-    int countb=0;
-    int countc=0;
-    double totala=0;
-    double totalb=0;
-    double totalc=0;
-    double averagea=0;
-    double averageb=0;
-    double averagec=0;
+//     int counta=0;
+//     int countb=0;
+//     int countc=0;
+//     double totala=0;
+//     double totalb=0;
+//     double totalc=0;
+//     double averagea=0;
+//     double averageb=0;
+//     double averagec=0;
 
-    for (int i=0; i<=logbook.size()-1; i++){
-        if(logbook[i].grade == 'A'){
-            counta++;
-            totala+=logbook[i].kg;
+//     for (int i=0; i<=logbook.size()-1; i++){
+//         if(logbook[i].grade == 'A'){
+//             counta++;
+//             totala+=logbook[i].kg;
 
-        } else if(logbook[i].grade == 'B'){
-            countb++;
-            totalb+=logbook[i].kg;
-        } else{
-            countc++;
-            totalc+=logbook[i].kg;
-        }
-    }
+//         } else if(logbook[i].grade == 'B'){
+//             countb++;
+//             totalb+=logbook[i].kg;
+//         } else{
+//             countc++;
+//             totalc+=logbook[i].kg;
+//         }
+//     }
 
-    averagea=totala/counta;
-    averageb=totalb/countb;
-    averagec=totalc/countc;
+//     averagea=totala/counta;
+//     averageb=totalb/countb;
+//     averagec=totalc/countc;
 
-    double bestaverage = max({averagea, averageb, averagec});
+//     double bestaverage = max({averagea, averageb, averagec});
 
-char bestgrade;
+// char bestgrade;
 
-if (bestaverage == averagea) {
-    bestgrade = 'A';
-} else if (bestaverage == averageb) {
-    bestgrade = 'B';
-} else {
-    bestgrade = 'C';
-}
+// if (bestaverage == averagea) {
+//     bestgrade = 'A';
+// } else if (bestaverage == averageb) {
+//     bestgrade = 'B';
+// } else {
+//     bestgrade = 'C';
+// }
     
-    cout<<"Grade A: " << counta << " deliveries "<<totala <<" kg total "<<averagea<<" kg average"<<endl<< "Grade B: " << countb << " deliveries "<<totalb <<" kg total "<<averageb<<" kg average"<<endl<<"Grade C: " << countc<< " deliveries "<<totalc<<" kg total "<<averagec<<" kg average"<<endl<< "Best average: "<<bestgrade<<endl;    
+//     cout<<"Grade A: " << counta << " deliveries "<<totala <<" kg total "<<averagea<<" kg average"<<endl<< "Grade B: " << countb << " deliveries "<<totalb <<" kg total "<<averageb<<" kg average"<<endl<<"Grade C: " << countc<< " deliveries "<<totalc<<" kg total "<<averagec<<" kg average"<<endl<< "Best average: "<<bestgrade<<endl;    
 
 
 
@@ -225,7 +227,47 @@ if (bestaverage == averagea) {
     //  Uses: logbook, and the findFarmer function you write below main
     // =================================================================
 
+    
     cout << "=== Q3 ===\n";
+
+
+cout << "findFarmer(Isanda) = " << findFarmer(logbook, "Isanda") << endl;
+cout << "findFarmer(Mukamana) = " << findFarmer(logbook, "Mukamana") << endl;
+
+int mostdeliveries = 0;
+double mostkg = 0;
+
+string busiestfarmer = "";
+string biggestfarmer = "";
+
+for (int i = 0; i < logbook.size(); i++) {
+    int count = 0;
+    double total = 0;
+
+    for (int j = 0; j < logbook.size(); j++) {
+        if (logbook[i].farmer == logbook[j].farmer) {
+            count++;
+            total += logbook[j].kg;
+        }
+    }
+
+    if (count > mostdeliveries) {
+        mostdeliveries = count;
+        busiestfarmer = logbook[i].farmer;
+    }
+
+    if (total > mostkg) {
+        mostkg = total;
+        biggestfarmer = logbook[i].farmer;
+    }
+}
+
+cout << "Most deliveries: " << busiestfarmer
+     << " (" << mostdeliveries << ")" << endl;
+
+cout << "Most kg: " << biggestfarmer
+     << " (" << mostkg << " kg)" << endl;
+
 
 
 
@@ -300,6 +342,16 @@ if (bestaverage == averagea) {
     return 0;
 }
 
+
+int findFarmer(const vector<Delivery> &log, string name) 
+    {
+    for (int i = 0; i < log.size(); i++) {
+        if (log[i].farmer == name) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 // =====================================================================
 //  FUNCTIONS YOU WRITE
