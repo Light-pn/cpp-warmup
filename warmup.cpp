@@ -85,6 +85,7 @@ void printBoard(const vector<int> &b) {
 }
 
 int findFarmer(const vector<Delivery> &log, string name);
+double payment(double kg, char grade);
 
 
 int main() {
@@ -284,6 +285,35 @@ cout << "Most kg: " << biggestfarmer
     cout << "=== Q4 ===\n";
 
 
+cout << "=== Q4 ===" << endl;
+
+double totalpaid = 0;
+
+for (int i = 0; i < logbook.size(); i++) {
+    double amount = payment(logbook[i].kg, logbook[i].grade);
+    bool halved = false;
+
+    if (totalpaid > 100000) {
+        amount = amount / 2;
+        halved = true;
+    }
+
+    cout << logbook[i].farmer << " "
+         << logbook[i].kg << " kg grade "
+         << logbook[i].grade << " -> " << amount;
+
+    if (halved) {
+        cout << "  (halved)";
+    }
+
+    cout << endl;
+
+    totalpaid += amount;
+}
+
+cout << "Total paid: " << totalpaid << endl;
+
+
 
 
 
@@ -352,6 +382,22 @@ int findFarmer(const vector<Delivery> &log, string name)
     }
     return -1;
 }
+
+
+double payment(double kg, char grade) {
+    double amount = kg * 450;
+
+    if (grade == 'A') {
+        amount = amount * 1.10;
+    } else if (grade == 'B') {
+        amount = amount;
+    } else {
+        amount = amount * 0.80;
+    }
+
+    return amount;
+}
+
 
 // =====================================================================
 //  FUNCTIONS YOU WRITE
