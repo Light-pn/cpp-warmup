@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <cctype>
 using namespace std;
 
 /**
@@ -326,6 +327,84 @@ cout << "Total paid: " << totalpaid << endl;
     // =================================================================
 
     cout << "=== Q5 ===\n";
+
+int accepted = 0;
+int rejected = 0;
+
+for (int i = 0; i < rawRecords.size(); i++) {
+    string id = rawRecords[i].id;
+    string kg = rawRecords[i].kg;
+    char grade = toupper(rawRecords[i].grade);
+
+    string reason = "";
+
+    
+    if (id.size() != 4 || id[0] != 'F') {
+        reason = "bad id";
+    } else {
+        for (int j = 1; j < 4; j++) {
+            if (!isdigit(id[j])) {
+                reason = "bad id";
+            }
+        }
+    }
+
+    
+    if (reason == "") {
+        if (kg == "") {
+            reason = "weight missing";
+        } else {
+            bool number = true;
+            int dots = 0;
+            int digits = 0;
+
+            for (int j = 0; j < kg.size(); j++) {
+                if (isdigit(kg[j])) {
+                    digits++;
+                } else if (kg[j] == '.') {
+                    dots++;
+                } else if (j == 0 && (kg[j] == '-' || kg[j] == '+')) {
+                    // Allow a sign at the beginning
+                } else {
+                    number = false;
+                }
+            }
+
+            if (dots > 1 || digits == 0) {
+                number = false;
+            }
+
+            if (!number) {
+                reason = "weight not a number";
+            } else {
+                double weight = stod(kg);
+
+                if (weight <= 0 || weight > 80) {
+                    reason = "weight out of range";
+                }
+            }
+        }
+    }
+
+
+    if (reason == "") {
+        if (grade != 'A' && grade != 'B' && grade != 'C') {
+            reason = "unknown grade";
+        }
+    }
+
+
+    if (reason == "") {
+        cout << id << " ACCEPT" << endl;
+        accepted++;
+    } else {
+        cout << id << " REJECT - " << reason << endl;
+        rejected++;
+    }
+}
+
+cout << accepted << " accepted, "
+     << rejected << " rejected" << endl;
 
 
 
