@@ -113,7 +113,49 @@ Best average: grade B
 > Grade B wins on average while grade A wins on total. Those are different
 > questions and they have different answers.
 >
-> Guard against dividing by zero. There happen to be deliveries of every grade
+> Guard against div
+//     int counta=0;
+//     int countb=0;
+//     int countc=0;
+//     double totala=0;
+//     double totalb=0;
+//     double totalc=0;
+//     double averagea=0;
+//     double averageb=0;
+//     double averagec=0;
+
+//     for (int i=0; i<=logbook.size()-1; i++){
+//         if(logbook[i].grade == 'A'){
+//             counta++;
+//             totala+=logbook[i].kg;
+
+//         } else if(logbook[i].grade == 'B'){
+//             countb++;
+//             totalb+=logbook[i].kg;
+//         } else{
+//             countc++;
+//             totalc+=logbook[i].kg;
+//         }
+//     }
+
+//     averagea=totala/counta;
+//     averageb=totalb/countb;
+//     averagec=totalc/countc;
+
+//     double bestaverage = max({averagea, averageb, averagec});
+
+// char bestgrade;
+
+// if (bestaverage == averagea) {
+//     bestgrade = 'A';
+// } else if (bestaverage == averageb) {
+//     bestgrade = 'B';
+// } else {
+//     bestgrade = 'C';
+// }
+    
+//     cout<<"Grade A: " << counta << " deliveries "<<totala <<" kg total "<<averagea<<" kg average"<<endl<< "Grade B: " << countb << " deliveries "<<totalb <<" kg total "<<averageb<<" kg average"<<endl<<"Grade C: " << countc<< " deliveries "<<totalc<<" kg total "<<averagec<<" kg average"<<endl<< "Best average: "<<bestgrade<<endl;    
+iding by zero. There happen to be deliveries of every grade
 > in this data, but your code should not fall over if there were not.
 
 ## Q3 · Who is who
